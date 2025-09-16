@@ -1,10 +1,598 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-    <title>My First Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="منصة متكاملة لوكالة سفر وسياحة لإدارة البرامج السياحية والحجوزات وربطها مع أنظمة التوزيع العالمية مثل أماديوس وجاليليو.">
+    <title>وكالة سفر وسياحة ذكية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --primary: #1365a8;
+            --primary-dark: #0b4675;
+            --accent: #f4b942;
+            --background: #f5f8fb;
+            --text: #1f2933;
+            --muted: #6b7a8f;
+            --card-bg: #ffffff;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(19, 101, 168, 0.92), rgba(11, 70, 117, 0.95)), url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1600&q=80') center/cover;
+            color: #fff;
+            padding: 2.5rem 1.5rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(11, 70, 117, 0.25);
+        }
+
+        header .content {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            opacity: 0.7;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4vw + 1rem, 3.6rem);
+            margin: 0 0 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin: 0 0 2rem;
+            max-width: 28rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #2b2b2b;
+            box-shadow: 0 10px 20px rgba(13, 81, 129, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(13, 81, 129, 0.3);
+        }
+
+        main {
+            margin-top: -4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        section {
+            margin-bottom: 4.5rem;
+        }
+
+        h2 {
+            font-size: 2.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .section-intro {
+            max-width: 720px;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.8rem;
+            box-shadow: 0 16px 40px rgba(15, 75, 120, 0.08);
+            border: 1px solid rgba(19, 101, 168, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 1.35rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(19, 101, 168, 0.12);
+            color: var(--primary-dark);
+            border-radius: 999px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .integrations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .integration-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border: 1px solid rgba(19, 101, 168, 0.1);
+            box-shadow: 0 12px 28px rgba(15, 75, 120, 0.07);
+        }
+
+        .integration-card strong {
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .timeline-item {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border-right: 4px solid var(--accent);
+            box-shadow: 0 12px 30px rgba(15, 75, 120, 0.08);
+        }
+
+        .timeline-item h4 {
+            margin: 0 0 0.5rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-list li {
+            background: rgba(19, 101, 168, 0.08);
+            padding: 1rem 1.2rem;
+            border-radius: 0.85rem;
+            margin: 0;
+            list-style: none;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .table-wrapper {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 12px 28px rgba(15, 75, 120, 0.07);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 640px;
+        }
+
+        th, td {
+            padding: 1rem 1.2rem;
+            text-align: right;
+        }
+
+        th {
+            background: rgba(19, 101, 168, 0.1);
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(19, 101, 168, 0.05);
+        }
+
+        .cta {
+            background: linear-gradient(135deg, rgba(19, 101, 168, 0.95), rgba(11, 70, 117, 0.95));
+            color: #fff;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .cta h2 {
+            color: #fff;
+            margin-top: 0;
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            padding: 0.85rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        footer {
+            background: #0b4675;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: #f4b942;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero p {
+                max-width: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is my first website using GitHub Pages!</p>
+    <header>
+        <nav>
+            <span class="logo">✈️ راحلــة برو</span>
+            <ul>
+                <li><a href="#solutions">الحلول</a></li>
+                <li><a href="#integrations">التكاملات</a></li>
+                <li><a href="#itineraries">الجداول السياحية</a></li>
+                <li><a href="#contact">تواصل</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="hero">
+                <span class="badge">منصة موحدة للوكالات</span>
+                <h1>إدارة كاملة للبرامج السياحية والحجوزات من نقطة واحدة</h1>
+                <p>صممت منصة "راحلة برو" لتمكين وكالات السفر من بناء برامج سياحية متكاملة، وإدارة حجوزات الطيران والفنادق والأنشطة وربطها مباشرة مع شركاء التوزيع العالميين.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">طلب عرض توضيحي</a>
+                    <a href="#solutions" class="btn btn-outline">اكتشف المنصة</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1502920917128-1aa500764b84?auto=format&fit=crop&w=800&q=80" alt="تخطيط الرحلات" style="width:100%;border-radius:1.5rem;box-shadow:0 25px 60px rgba(12,68,113,0.35);">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container" id="solutions">
+            <section>
+                <h2>حلول متكاملة لوكالات السفر</h2>
+                <p class="section-intro">من خلال واجهة موحدة، تدير المنصة دورة العمل الكاملة للرحلات من التصميم وحتى المتابعة بعد العودة، مع أتمتة المهام المتكررة وتكامل مباشر مع أنظمة الحجز العالمية.</p>
+                <div class="grid">
+                    <article class="card">
+                        <h3>إدارة البرامج السياحية</h3>
+                        <p>قم ببناء برامج متعددة الوجهات مع قوالب قابلة للتخصيص وجدولة دقيقة للأنشطة ومراقبة التكاليف وهوامش الربح لحظة بلحظة.</p>
+                        <ul class="feature-list">
+                            <li>قوالب رحلات جاهزة مع إمكانية التعديل</li>
+                            <li>مكتبة صور وفيديو لكل مدينة</li>
+                            <li>إصدار عروض أسعار متعددة العملات</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>حجوزات الطيران والفنادق</h3>
+                        <p>واجهة بحث متقدمة مرتبطة بـ Amadeus، Galileo، Sabre، وTravelport مع إدارة فورية لتذاكر الطيران والفنادق والشقق الفندقية.</p>
+                        <ul class="feature-list">
+                            <li>تأكيد تلقائي للحجوزات وتذكرة إلكترونية</li>
+                            <li>تنبيهات تغير الأسعار وتوفر المقاعد</li>
+                            <li>مقارنة الأسعار بين الموردين لحظياً</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>إدارة الأنشطة والخدمات الأرضية</h3>
+                        <p>ربط مباشر مع مزودي الرحلات، الجولات، النقل البري، والتأشيرات مع بوابة للدفع الإلكتروني وإصدار الفواتير.</p>
+                        <ul class="feature-list">
+                            <li>أسعار تفاوضية مع موردي الأنشطة</li>
+                            <li>تتبع حالة كل خدمة في سير العمل</li>
+                            <li>دعم خدمات العملاء متعدد اللغات</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>بوابة العملاء والشركاء</h3>
+                        <p>وفّر لعملائك وشركاء B2B لوحة تحكم لعرض الرحلات المؤكدة، الجداول اليومية، وإدارة المدفوعات والفواتير.</p>
+                        <ul class="feature-list">
+                            <li>تسليم مستندات السفر بنقرة واحدة</li>
+                            <li>توقيع إلكتروني للعقود والسياسات</li>
+                            <li>تحديثات فورية عبر البريد والرسائل</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="integrations">
+                <h2>تكاملات تقنية مع شركاء التوزيع</h2>
+                <p class="section-intro">يدمج النظام واجهات برمجة التطبيقات (APIs) لأهم أنظمة التوزيع العالمية ومنصات الموردين لتأمين أحدث الأسعار والتوافر ومزامنة البيانات عبر جميع القنوات.</p>
+                <div class="integrations">
+                    <div class="integration-card">
+                        <span class="badge">أنظمة التوزيع العالمية (GDS)</span>
+                        <strong>Amadeus · Galileo · Sabre</strong>
+                        <p>سحب جداول الرحلات، أسعار المقاعد، سياسة الأمتعة، ومزامنة التحديثات التلقائية مع ملف حجز العميل (PNR).</p>
+                    </div>
+                    <div class="integration-card">
+                        <span class="badge">منصات الفنادق</span>
+                        <strong>Booking.com · Expedia TAAP · Hotelbeds</strong>
+                        <p>عرض فوري للتوفر، الصور، سياسات الإلغاء، ومراجعات الضيوف مع تسعير صافي وعمولات مخصصة للوكالة.</p>
+                    </div>
+                    <div class="integration-card">
+                        <span class="badge">الأنشطة والجولات</span>
+                        <strong>Viator · GetYourGuide · Musement</strong>
+                        <p>حجز الأنشطة اليومية والنقل من المطار مع خيار الربط المباشر في البرنامج السياحي وإرسال القسائم الإلكترونية.</p>
+                    </div>
+                    <div class="integration-card">
+                        <span class="badge">المدفوعات والمحاسبة</span>
+                        <strong>HyperPay · PayTabs · Zoho Books</strong>
+                        <p>تحصيل إلكتروني متعدد العملات، جداول تسويات للموردين، وتكامل مع الأنظمة المحاسبية لتتبع الأرباح والخسائر.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dashboard">
+                <h2>لوحة تحكم ذكية لأداء الأعمال</h2>
+                <p class="section-intro">راقب أداء المبيعات، حجوزات الطيران والفنادق، رضا العملاء، وفعالية الموردين عبر لوحات مؤشرات تفاعلية وتقارير قابلة للتخصيص.</p>
+                <div class="grid">
+                    <article class="card">
+                        <span class="badge">تحليلات متقدمة</span>
+                        <h3>مؤشرات الأداء الرئيسية</h3>
+                        <p>قارن بين خطط المبيعات والنتائج الفعلية، وتتبع أفضل الوجهات، والأوقات الأكثر طلباً، مع توقعات مدعومة بالذكاء الاصطناعي.</p>
+                    </article>
+                    <article class="card">
+                        <span class="badge">أتمتة الأعمال</span>
+                        <h3>سير عمل مهيأ</h3>
+                        <p>صمم سيناريوهات اعتماد للمدفوعات والخصومات، وأرسل مهام متابعة للفريق بناءً على حالة كل حجز.</p>
+                    </article>
+                    <article class="card">
+                        <span class="badge">خدمة العملاء</span>
+                        <h3>مركز تذاكر موحد</h3>
+                        <p>استقبل طلبات العملاء عبر البريد والواتساب والموقع، ووزعها تلقائياً على الوكلاء المختصين مع سجل موحد للمحادثات.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="itineraries">
+                <h2>جداول سفر ديناميكية</h2>
+                <p class="section-intro">انشئ جدولاً يومياً تفصيلياً لكل رحلة، مع معلومات الطيران، النقل، الأنشطة، والملاحظات الخاصة بالعميل، وشاركه في تطبيق العميل أو ملف PDF أنيق.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>اليوم</th>
+                                <th>الوجهة</th>
+                                <th>النشاط الأساسي</th>
+                                <th>الإقامة</th>
+                                <th>ملاحظات العميل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>إسطنبول</td>
+                                <td>جولة في المدينة القديمة مع دليل عربي</td>
+                                <td>فندق سيراج بوسفور</td>
+                                <td>استقبال في المطار وتوفير شريحة اتصال</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>بورصة</td>
+                                <td>زيارة جبل أولوداغ والتلفريك</td>
+                                <td>العودة إلى إسطنبول مساءً</td>
+                                <td>تعديل موعد العشاء إلى الثامنة مساءً</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>طرابزون</td>
+                                <td>رحلة جوية متصلة وحجز سيارة خاصة</td>
+                                <td>منتجع وادي أوزنجول</td>
+                                <td>إضافة رحلة بحرية اختيارية</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>طرابزون</td>
+                                <td>زيارة دير سوميلا وغابات المروج</td>
+                                <td>المنتجع نفسه</td>
+                                <td>تذكير بالتأمين الطبي للسفر</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="workflow">
+                <h2>رحلة العميل من الاستفسار إلى ما بعد العودة</h2>
+                <p class="section-intro">سير العمل المعياري يضمن تجربة سلسة لكل عميل، ويتيح للفريق التحكم الكامل في كل مرحلة مع سجلات واضحة.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>1. استقبال الطلب</h4>
+                        <p>جمع المتطلبات عبر نموذج ذكي وتحديد الميزانية وعدد المسافرين وتواريخ السفر، مع ربط الطلب بحملات التسويق.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>2. تصميم البرنامج</h4>
+                        <p>اختيار الوجهات والأنشطة المناسبة، بناء جدول الرحلة، حساب الأسعار والأرباح، وإرسال العرض للعميل بصيغة تفاعلية.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>3. تأكيد الحجز والدفع</h4>
+                        <p>أتمتة إصدار التذاكر والقسائم الفندقية، وتحصيل الدفعات إلكترونياً، مع سياسات إلغاء واضحة وإشعارات فورية.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>4. المتابعة أثناء الرحلة</h4>
+                        <p>تحديثات حية للجدول عبر تطبيق الهاتف، دردشة مع فريق الدعم، وتقييم الموردين أثناء التنفيذ.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>5. ما بعد الرحلة</h4>
+                        <p>استبيانات رضا، أرشفة التذاكر والمستندات، وإنشاء عروض مخصصة للرحلات المستقبلية بناءً على تفضيلات العميل.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="contact" class="container">
+            <div class="cta">
+                <div>
+                    <h2>ابدأ رحلتك الرقمية اليوم</h2>
+                    <p>احجز جلسة مع فريقنا لاكتشاف كيف يمكن لـ "راحلة برو" تطوير عمليات وكالتك، تعزيز ولاء العملاء، وزيادة المبيعات عبر الربط مع Amadeus، Galileo، وغيرها.</p>
+                    <p>نحن ندعم عملياتك في الشرق الأوسط وشمال أفريقيا مع فريق محلي وخيارات استضافة سحابية آمنة.</p>
+                </div>
+                <form>
+                    <label for="name">اسم الوكالة</label>
+                    <input type="text" id="name" name="name" placeholder="شركة المسافر الذهبي" required>
+
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" placeholder="agency@example.com" required>
+
+                    <label for="focus">مجال الاهتمام الرئيسي</label>
+                    <select id="focus" name="focus">
+                        <option>حجوزات الطيران</option>
+                        <option>البرامج السياحية والجولات</option>
+                        <option>حجوزات الفنادق</option>
+                        <option>التكامل مع شركاء B2B</option>
+                    </select>
+
+                    <label for="message">رسالتك</label>
+                    <textarea id="message" name="message" placeholder="حدثنا عن التحديات التي ترغب في حلها..."></textarea>
+
+                    <button type="submit" class="btn btn-primary">إرسال الطلب</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 راحلة برو - منصة إدارة وكالات السفر والسياحة. جميع الحقوق محفوظة.</p>
+        <p>تواصل معنا عبر البريد <a href="mailto:hello@rahlapro.com">hello@rahlapro.com</a> أو الهاتف +966 55 123 4567</p>
+    </footer>
 </body>
 </html>
